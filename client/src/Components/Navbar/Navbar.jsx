@@ -1,57 +1,78 @@
-import React from 'react';
+import React from 'react'
+import { useState } from 'react';
+import logo from '../../Assets/logo.png'
+import { AiOutlineMenu } from "react-icons/ai";
+import { IoCloseSharp } from "react-icons/io5";
 
-/* import { FaCartPlus } from "react-icons/fa"; */
-import logo from '../../Assets/logo.png';
- /* import './Navbar.css' */
 
 const Navbar = () => {
-
+  const [menu, setMenu] = useState(false)
+  const navItems = [
+    {
+      id: 1,
+      text: "Home"
+    },
+    {
+      id: 2,
+      text: "About Us"
+    },
+    {
+      id: 3,
+      text: "Gallery"
+    },
+    {
+      id: 4,
+      text: "SignIn"
+    },
+  ]
   return (
+    <>
+      <div className="max-w-screen-2xl container mx-auto px-4 md:px-20 h-16 shadow-md fixed top-0 left-0 right-0">
+        <div className='flex justify-between items-center h-16'>
 
-    <nav className="navbar navbar-expand-lg fixed-top navbar-scroll">
-  <div className="container">
-    <img src={logo} alt='logo' height="30" loading="lazy" />
-    <button className="navbar-toggler ps-0" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
-      aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon d-flex justify-content-start align-items-center">
-        <i class="fas fa-bars"></i>
-      </span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarExample01">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" aria-current="page" href="#news">News</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#pets">Pets</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#adoptions">Adoptions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#foundation">Foundation</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#help">How can I help?</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#education">Education</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#about">About us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#contact">Contact</a>
-        </li>
-      </ul>
+          <div>
+            <img src={logo} alt='Logo' className='w-25' />
+          </div>
+          <div>
+            <ul className='hidden md:flex space-x-8'>
+              {
+                navItems.map(({ id, text }) => (
+                  <li className='hover:scale-105 duration-200 cursor-pointer' key={id}>{text}</li>
+                ))
+              }
 
-     
-    </div>
-  </div>
-</nav>
-  );
+            </ul>
+            <div onClick={() => setMenu(!menu)} className='md:hidden'>
+              {menu ? <IoCloseSharp size={24} /> : <AiOutlineMenu size={24} />}
+            </div>
+
+
+          </div>
+        </div>
+
+        {/* modile Navbar */}
+        {
+          menu &&
+          <div>
+            <ul className='md:hidden flex flex-col h-screen items-center justify-center space-y-3 text-xl'>
+              {
+                navItems.map(({ id, text }) => (
+                  <li className='hover:scale-105 duration-200 font-semibold cursor-pointer' key={id}>{text}</li>
+                ))
+              }
+
+            </ul>
+          </div>
+        }
+
+
+
+
+      </div>
+
+    </>
+
+  )
 }
 
-export default Navbar;
-
-
+export default Navbar
