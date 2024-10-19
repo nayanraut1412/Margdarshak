@@ -1,12 +1,12 @@
 import React from 'react';
-import Navbar from '../Components/Navbar/Navbar';
-// import Hero from '../Components/Hero/Hero';
+import Navbar from '../Components/LandingPage/Navbar';
+import Hero from '../Components/LandingPage/Hero';
 
 const Home = () => {
   return (
    <>
      <Navbar />
-     {/* <Hero/> */}
+     <Hero/>
   
     </>
   );
