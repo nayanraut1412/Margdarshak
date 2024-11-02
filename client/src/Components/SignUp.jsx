@@ -12,6 +12,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
     try {
       await axios.post('http://localhost:5000/api/auth/register', formData);
       navigate('/signin');

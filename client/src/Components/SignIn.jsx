@@ -18,6 +18,9 @@ const SignIn = () => {
       localStorage.setItem('token', res.data.token);
       navigate('/dashboard');
     } catch (err) {
+      const errorMessage = err.response && err.response.data ? err.response.data.error : 'Login failed';
+      alert(errorMessage); 
+    
       console.log(err);
     }
   };
