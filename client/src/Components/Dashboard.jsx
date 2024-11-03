@@ -21,11 +21,11 @@ const Dashboard = () => {
   }, [navigate]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="p-6 bg-white shadow-md rounded">
-        <h1 className="text-2xl mb-4">Welcome, {role === 'mentor' ? <Mentor /> : <Mentee /> }!</h1>
-      </div>
-    </div>
+    // <div className="flex  items-center min-h-screen bg-gray-100">
+       <div className="py-16">
+        <h1 className="">{role === 'mentor' ? <Mentor /> : <Mentee /> }</h1>
+       </div> 
+    // </div>
   );
 };
 

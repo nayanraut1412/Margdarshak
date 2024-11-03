@@ -1,12 +1,14 @@
 import React from 'react';
 import Navbar from '../Components/Mentee/MeNavbar';
-// import Hero from '../Components/Hero/Hero';
+import Hero from '../Components/Mentee/MenteeHero';
+import FindMentor from '../Components/Mentee/FindMentor';
 
 const Home = () => {
   return (
    <>
      <Navbar />
-     {/* <Hero/> */}
+     <Hero/>
+     <FindMentor/>
   
     </>
   );
