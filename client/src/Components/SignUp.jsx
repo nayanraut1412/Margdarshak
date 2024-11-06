@@ -14,7 +14,7 @@ const SignUp = () => {
     e.preventDefault();
     console.log(formData);
     try {
-      await axios.post('http://localhost:5000/api/auth/register', formData);
+      await axios.post('https://margdarshak-8rct.onrender.com/api/auth/register', formData);
       navigate('/signin');
     } catch (err) {
       console.log(err);

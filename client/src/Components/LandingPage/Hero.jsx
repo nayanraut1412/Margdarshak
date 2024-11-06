@@ -6,14 +6,19 @@ const Hero = () => {
   return (
     <>
       <div className='max-w-screen-2xl container mx-auto px-4 md:px-20 my-20'>
+      <div className="flex justify-center text-center">
+        Cloud Computing CA-2
+      </div>
         <div className='flex flex-col md:flex-row'>
           <div className='md:w-1/2 ml-12 mt-12 md:mt-36 space-y-2 order-2 md:order-1'>
             <span className='text-1xl'>Welcome to Mentor Connect</span>
             <div className='flex space-x-1 text-2xl md:text-3xl'>
               <h1>Your gateway to expert</h1>
+
               {/* <span className='text-blue-700 font-bold'>Skill Development</span> */}
               <ReactTyped
                 className='text-blue-700 font-bold'
+
                 // typedRef={setTyped}
                 strings={["Skill Development", "Resume Building",  "Career Guidance"]}
                 typeSpeed={40}

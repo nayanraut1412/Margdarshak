@@ -15,7 +15,7 @@ const MenteeDashboard = () => {
           throw new Error('User not authenticated');
         }
 
-        const response = await axios.get('http://localhost:5000/api/mentors/all-mentors-availability', {
+        const response = await axios.get('https://margdarshak-8rct.onrender.com/api/mentors/all-mentors-availability', {
           headers: { Authorization: `${token}` },
         });
 
@@ -42,7 +42,7 @@ const MenteeDashboard = () => {
       }
 
       const response = await axios.patch(
-        `http://localhost:5000/api/mentors/book-slot`,
+        `https://margdarshak-8rct.onrender.com/api/mentors/book-slot`,
         { mentorId, slotId },
         { headers: { Authorization: `${token}` } }
       );

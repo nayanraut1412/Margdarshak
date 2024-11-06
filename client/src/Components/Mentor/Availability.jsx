@@ -14,7 +14,7 @@ const Availability = () => {
         throw new Error('No token found, please log in.');
       }
 
-      const response = await axios.get('http://localhost:5000/api/mentors/availability', {
+      const response = await axios.get('https://margdarshak-8rct.onrender.com/api/mentors/availability', {
         headers: { Authorization: `${token}` },
       });
 
@@ -52,7 +52,7 @@ const Availability = () => {
       }
 
       const response = await axios.post(
-        'http://localhost:5000/api/mentors/availability',
+        'https://margdarshak-8rct.onrender.com/api/mentors/availability',
         availability,
         {
           headers: { Authorization: token },
@@ -85,7 +85,7 @@ const Availability = () => {
         throw new Error('User not authenticated');
       }
 
-      await axios.delete(`http://localhost:5000/api/mentors/availability/${id}`, {
+      await axios.delete(`https://margdarshak-8rct.onrender.com/api/mentors/availability/${id}`, {
         headers: { Authorization: token },
       });
 
@@ -98,7 +98,10 @@ const Availability = () => {
 
   return (
     <div className="ustify-center hero-page p-6 w-full rounded-lg bg-white shadow-md">
-      <h2 className="text-3xl font-bold mb-6 text-center">Manage Your Availability</h2>
+    <div className="flex justify-center text-center">
+        Cloud Computing CA-2
+      </div>
+      <h2 className="text-3xl font-bold p-5 mb-6 text-center">Manage Your Availability</h2>
       <div className="flex flex-col md:flex-row gap-8">
         {/* Left Column: Display availability list with edit and delete options */}
         <div className="md:w-1/2 w-full bg-gray-100 p-6 rounded-md shadow-sm">

@@ -18,7 +18,7 @@ const Hero = () => {
           throw new Error('User not authenticated');
         }
 
-        const response = await axios.get('http://localhost:5000/api/mentee/name', {
+        const response = await axios.get('https://margdarshak-8rct.onrender.com/api/mentee/name', {
           headers: { Authorization: `${token}` },
         });
 
@@ -39,6 +39,9 @@ const Hero = () => {
   return (
     <>
       <div className='max-w-screen-xl mx-auto my-5 px-4 md:px-20 py-16'>
+      <div className="flex justify-center text-center">
+        Cloud Computing CA-2
+      </div>
         <div className='flex flex-col md:flex-row'>
           <div className='md:w-1/2 ml-8 mr-20 mt-0 md:mt-36 order-2 md:order-1'>
             <span className='text-2xl text-blue-700 font-bold'>Welcome, {userName}!</span>
