@@ -2,10 +2,13 @@ import React from 'react';
 import Navbar from '../Components/Mentor/MrNavbar';
 import Availability from '../Components/Mentor/Availability';
 
-const Home = () => {
+import MentorHome from '../Components/Mentor/MentorHome';
+
+const Mentor = () => {
   return (
    <>
      <Navbar />
+     <MentorHome />
      <Availability/>
      {/* <Hero/> */}
   
@@ -13,6 +16,6 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default Mentor;
 
 

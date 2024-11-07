@@ -3,7 +3,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+// const backendUrl =
+//   process.env. REACT_APP_API_URL_PRODUCTION || process.env.REACT_APP_API_URL_LOCAL;
+const backendUrl = process.env.REACT_APP_API_URL_LOCAL;
+
 const SignIn = () => {
+
   const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
@@ -14,7 +19,11 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://margdarshak-8rct.onrender.com/api/auth/login', formData);
+      console.log("Environment Variables:", process.env);
+      console.log("Backend URL from .env:", backendUrl);
+
+
+      const res = await axios.post(`${backendUrl}/api/auth/login`, formData);
       localStorage.setItem('token', res.data.token);
       console.log(localStorage.getItem('token'));
       navigate('/dashboard');

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+
 const { verifyToken } = require('../middlewares/authMiddleware'); // Ensure correct import
 
 // Add availability date and time for the mentor
@@ -90,45 +91,14 @@ router.delete('/availability/:id', verifyToken, async (req, res) => {
   }
 });
 
-
-// Get all mentors' availability for mentee dashboard
-router.get('/all-mentors-availability', verifyToken, async (req, res) => {
+router.get('/username', verifyToken, async (req, res) => {
   try {
-    // Fetch mentors with their name, expertise, and availability
-    const mentors = await User.find({ role: 'mentor' }, 'username expertise availability');
-    
-    if (!mentors) {
-      return res.status(404).json({ message: 'No mentors found' });
-    }
-
-    res.status(200).json(mentors);
+    const user = await User.findById(req.user.id).select('username'); // Adjust as needed to retrieve only necessary fields
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.json(user);
   } catch (error) {
-    console.error('Error fetching mentors:', error);
+    console.error(error);
     res.status(500).json({ message: 'Server error' });
-  }
-});
-
-
-// Route to book a slot
-router.patch('/book-slot', verifyToken, async (req, res) => {
-  const { mentorId, slotId } = req.body;
-  console.log(mentorId, slotId);
-
-  try {
-    const mentor = await User.findOneAndUpdate(
-      { _id: mentorId, 'availability._id': slotId, 'availability.isBooked': false }, // Check if the slot is not already booked
-      { $set: { 'availability.$.isBooked': true } }, // Update `isBooked` to true
-      { new: true }
-    );
-
-    if (!mentor) {
-      return res.status(404).json({ message: 'Mentor or slot not found, or already booked' });
-    }
-
-    res.status(200).json({ message: 'Slot booked successfully', mentor });
-  } catch (error) {
-    console.error('Error booking slot:', error);
-    res.status(500).json({ message: 'Internal server error' });
   }
 });
 

@@ -3,7 +3,7 @@ import Navbar from '../Components/Mentee/MeNavbar';
 import Hero from '../Components/Mentee/MenteeHero';
 import FindMentor from '../Components/Mentee/FindMentor';
 
-const Home = () => {
+const Mentee = () => {
   return (
    <>
      <Navbar />
@@ -14,6 +14,6 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default Mentee;
 
 

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const backendUrl = process.env.REACT_APP_API_URL_LOCAL;
+
 const SignUp = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '',expertise:'', role: 'mentee' });
   const navigate = useNavigate();
@@ -14,7 +16,7 @@ const SignUp = () => {
     e.preventDefault();
     console.log(formData);
     try {
-      await axios.post('https://margdarshak-8rct.onrender.com/api/auth/register', formData);
+      await axios.post(`${backendUrl}/api/auth/register`, formData);
       navigate('/signin');
     } catch (err) {
       console.log(err);

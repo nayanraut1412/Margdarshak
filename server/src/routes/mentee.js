@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 
 const router = express.Router();
-router.get('/name', verifyToken, async (req, res) => {
+router.get('/username', verifyToken, async (req, res) => {
     try {
       const user = await User.findById(req.user.id).select('username'); // Adjust as needed to retrieve only necessary fields
       if (!user) return res.status(404).json({ message: 'User not found' });

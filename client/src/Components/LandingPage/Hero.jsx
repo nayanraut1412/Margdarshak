@@ -6,8 +6,10 @@ const Hero = () => {
   return (
     <>
       <div className='max-w-screen-2xl container mx-auto px-4 md:px-20 my-20'>
-      <div className="flex justify-center text-center">
-        Cloud Computing CA-2
+      <div className="flex justify-center text-xl md:text-2xl gap-14 font-bold text-blue-700 text-center">
+        <span>Cloud Computing CA-2 </span> 
+        <span>Prn: 1246491245038</span>
+        <span>Name: Nayan Raut</span> 
       </div>
         <div className='flex flex-col md:flex-row'>
           <div className='md:w-1/2 ml-12 mt-12 md:mt-36 space-y-2 order-2 md:order-1'>

@@ -1,15 +1,16 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Navbar from './MeNavbar';
 import { ReactTyped } from "react-typed";
 import consultant from "../../Assets/consultant.png";
+import Navbar from './MrNavbar';
+
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const backendUrl = process.env.REACT_APP_API_URL_LOCAL;
 
 
 const Hero = () => {
-    
+
   const [userName, setUserName] = useState('');
   const [, setError] = useState(null);
 
@@ -21,7 +22,7 @@ const Hero = () => {
           throw new Error('User not authenticated');
         }
 
-        const response = await axios.get(`${backendUrl}/api/mentee/username`, {
+        const response = await axios.get(`${backendUrl}/api/mentors/username`, {
           headers: { Authorization: `${token}` },
         });
 
@@ -39,23 +40,26 @@ const Hero = () => {
     fetchUserName();
   }, []);
 
+
   return (
     <>
-     <Navbar/>
-      <div className='max-w-screen-xl mx-auto my-5 px-4 md:px-20 py-20'>
+    <Navbar/>
+      <div className='max-w-screen-2xl container mx-auto px-4 md:px-20 my-20'>
       <div className="flex justify-center text-xl md:text-2xl gap-14 font-bold text-blue-700 text-center">
         <span>Cloud Computing CA-2 </span> 
         <span>Prn: 1246491245038</span>
         <span>Name: Nayan Raut</span> 
       </div>
         <div className='flex flex-col md:flex-row'>
-          <div className='md:w-1/2 ml-8 mr-20 mt-0 md:mt-36 order-2 md:order-1'>
-            <span className='text-2xl text-blue-700 font-bold'>Welcome, {userName}!</span>
+          <div className='md:w-1/2 ml-12 mt-12 md:mt-36 space-y-2 order-2 md:order-1'>
+            <span className='text-1xl'>Welcome Mentor {userName}!</span>
             <div className='flex space-x-1 text-2xl md:text-3xl'>
               <h1>Your gateway to expert</h1>
+
               {/* <span className='text-blue-700 font-bold'>Skill Development</span> */}
               <ReactTyped
                 className='text-blue-700 font-bold'
+
                 // typedRef={setTyped}
                 strings={["Skill Development", "Resume Building",  "Career Guidance"]}
                 typeSpeed={40}
@@ -77,4 +81,4 @@ const Hero = () => {
   )
 }
 
-export default Hero;
+export default Hero

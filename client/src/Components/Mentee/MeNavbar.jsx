@@ -19,19 +19,23 @@ const Navbar = () => {
   const navItems = [
     {
       id: 1,
-      text: "Home"
+      text: "Home",
+      path:"/MenteeHome"
     },
     {
       id: 2,
-      text: "Approval_session"
+      text: "Book Slots",
+      path:"/menteebooking"
     },
     {
       id: 3,
-      text: "Build Resume "
+      text: "Build Resume ",
+      path:"/MenteeHome"
     },
     {
       id: 4,
-      text: "Completed session"
+      text: "Completed session",
+      path: "/MenteeHome"
     },
   ]
   return (
@@ -45,13 +49,11 @@ const Navbar = () => {
           <div>
             <ul className='hidden md:flex space-x-8'>
               {
-                navItems.map(({ id, text }) => (
+                navItems.map(({ id, text, path }) => (
                   <li className='hover:scale-105 duration-200 cursor-pointer py-1 text-lg' 
                   key={id}>
-                  <Link to={text}>
-                  {text}
-                  </Link>
-
+                 <Link to={path}>{text}</Link>
+                 
                   </li>
                 ))
               }
