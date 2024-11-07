@@ -7,13 +7,13 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   expertise: { type: String, required: true },
   role: { type: String, enum: ['mentee', 'mentor'], required: true },
-availability: [
-    {
-      date: { type: Date, required: true },
-      time: { type: String, required: true },
-      isBooked: { type: Boolean, default: false }
-    }
-  ]
+// availability: [
+//     {
+//       date: { type: Date, required: true },
+//       time: { type: String, required: true },
+//       isBooked: { type: Boolean, default: false }
+//     }
+//   ]
 });
 
 

@@ -47,7 +47,7 @@ const Hero = () => {
       <div className='max-w-screen-2xl container mx-auto px-4 md:px-20 my-20'>
       <div className="flex justify-center text-xl md:text-2xl gap-14 font-bold text-blue-700 text-center">
         <span>Cloud Computing CA-2 </span> 
-        <span>Prn: 1246491245038</span>
+        <span>Prn: 2146491245038</span>
         <span>Name: Nayan Raut</span> 
       </div>
         <div className='flex flex-col md:flex-row'>
