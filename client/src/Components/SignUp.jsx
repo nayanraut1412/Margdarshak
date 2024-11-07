@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const backendUrl = process.env.REACT_APP_API_URL_LOCAL;
+const backendUrl = process.env.REACT_APP_API_URL_PRODUCTION;
 
 const SignUp = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '',expertise:'', role: 'mentee' });

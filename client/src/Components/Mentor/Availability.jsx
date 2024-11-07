@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './MrNavbar';
 
-const backendUrl = process.env.REACT_APP_API_URL_LOCAL;
+const backendUrl = process.env.REACT_APP_API_URL_PRODUCTION;
 
 const MentorAvailability = () => {
   const [date, setDate] = useState('');

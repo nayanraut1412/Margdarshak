@@ -23,7 +23,7 @@ const Navbar = () => {
     {
       id: 2,
       text: "Request",
-      path: "/request" // Path should match the route for Request.js
+      path: "/request" 
     },
     {
       id: 3,

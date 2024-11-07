@@ -5,7 +5,7 @@ import Navbar from './MeNavbar';
 import { ReactTyped } from "react-typed";
 import consultant from "../../Assets/consultant.png";
 
-const backendUrl = process.env.REACT_APP_API_URL_LOCAL;
+const backendUrl = process.env.REACT_APP_API_URL_PRODUCTION;
 
 
 const Hero = () => {

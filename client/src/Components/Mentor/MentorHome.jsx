@@ -6,7 +6,7 @@ import Navbar from './MrNavbar';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const backendUrl = process.env.REACT_APP_API_URL_LOCAL;
+const backendUrl = process.env.REACT_APP_API_URL_PRODUCTION;
 
 
 const Hero = () => {
