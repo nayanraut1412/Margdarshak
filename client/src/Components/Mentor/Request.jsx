@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './MrNavbar';
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const backendUrl = process.env.REACT_APP_API_URL_PRODUCTION;
+const backendUrl = process.env.REACT_APP_API_URL;
 
 const MentorRequests = () => {
   const [bookedSlots, setBookedSlots] = useState([]);
-  const [error, setError] = useState(null);
+  const [error, ] = useState(null);
 
   useEffect(() => {
     fetchBookedSlots();
@@ -18,7 +20,7 @@ const MentorRequests = () => {
       const token = localStorage.getItem('token');
       if (!token) {
         throw new Error('No token found, please log in.');
-      }
+      } 
 
       const response = await axios.get(`${backendUrl}/api/availability/booked`, {
         headers: { Authorization: token },
@@ -30,7 +32,7 @@ const MentorRequests = () => {
         throw new Error('Failed to fetch booked slots');
       }
     } catch (error) {
-      setError('Failed to load booked slots');
+      toast.error('Failed to load booked slots');
       console.error('Error fetching booked slots:', error);
     }
   };
@@ -38,8 +40,22 @@ const MentorRequests = () => {
   return (
     <>
       <Navbar />
+     
+      {/* <div className="mt-8"> */}
+        <ToastContainer 
+          position="top-right"
+          autoClose={3000}           // Auto close after 3 seconds
+          hideProgressBar={false}     // Show or hide the progress bar
+          closeOnClick                // Close on click
+          pauseOnHover                // Pause on hover
+          draggable     
+          transition={Slide}  
+          className="mt-14" 
+                     
+        />
+      {/* </div> */}
       <div className="container mx-auto p-20">
-        <h2 className="text-2xl font-semibold text-center mb-4">Mentor's Booked Slots</h2>
+        <h2 className="text-2xl font-semibold text-center mb-4">Mentee's Request</h2>
         {error && <p className="text-red-500">{error}</p>}
         
         {/* Display booked slots in a grid */}

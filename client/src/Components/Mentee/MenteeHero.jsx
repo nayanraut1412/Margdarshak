@@ -5,7 +5,11 @@ import Navbar from './MeNavbar';
 import { ReactTyped } from "react-typed";
 import consultant from "../../Assets/consultant.png";
 
-const backendUrl = process.env.REACT_APP_API_URL_PRODUCTION;
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
+const backendUrl = process.env.REACT_APP_API_URL;
 
 
 const Hero = () => {
@@ -27,8 +31,9 @@ const Hero = () => {
 
         if (response.status === 200) {
           setUserName(response.data.username); 
+
         } else {
-          setError('Failed to fetch user information');
+          toast.error('Failed to fetch user information');
         }
       } catch (error) {
         console.error('Error fetching user name:', error);
@@ -37,12 +42,24 @@ const Hero = () => {
     };
 
     fetchUserName();
+    
   }, []);
 
   return (
     <>
      <Navbar/>
-      <div className='max-w-screen-xl mx-auto my-5 px-4 md:px-20 py-20'>
+     <ToastContainer
+      position="top-right"
+      autoClose={3000}           // Auto close after 3 seconds
+      hideProgressBar={false}     // Show or hide the progress bar
+      closeOnClick                // Close on click
+      pauseOnHover                // Pause on hover
+      draggable   
+      transition={Slide}  
+      className="mt-14"                
+    />
+    
+      <div className='max-w-screen-xl mx-auto px-4 md:px-20 mt-20'>
       <div className="flex justify-center text-xl md:text-2xl gap-14 font-bold text-blue-700 text-center">
         <span>Cloud Computing CA-2 </span> 
         <span>Prn: 2146491245038</span>
@@ -50,7 +67,7 @@ const Hero = () => {
       </div>
         <div className='flex flex-col md:flex-row'>
           <div className='md:w-1/2 ml-8 mr-20 mt-0 md:mt-36 order-2 md:order-1'>
-            <span className='text-2xl text-blue-700 font-bold'>Welcome, {userName}!</span>
+            <span className='text-2xl text-blue-700 font-bold'>Welcome, Mentee {userName}!</span>
             <div className='flex space-x-1 text-2xl md:text-3xl'>
               <h1>Your gateway to expert</h1>
               {/* <span className='text-blue-700 font-bold'>Skill Development</span> */}

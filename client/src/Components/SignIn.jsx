@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-// const backendUrl =
-//   process.env. REACT_APP_API_URL_PRODUCTION || process.env.REACT_APP_API_URL_LOCAL;
-const backendUrl = process.env.REACT_APP_API_URL_PRODUCTION;
+import Navbar from './LandingPage/Navbar';
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const backendUrl = process.env.REACT_APP_API_URL;
 
 const SignIn = () => {
 
@@ -24,9 +26,14 @@ const SignIn = () => {
 
 
       const res = await axios.post(`${backendUrl}/api/auth/login`, formData);
+      toast.success('Signin successful! Redirecting to Dashboard...');
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 3000);
+
       localStorage.setItem('token', res.data.token);
       console.log(localStorage.getItem('token'));
-      navigate('/dashboard');
+  
     } catch (err) {
       const errorMessage = err.response && err.response.data ? err.response.data.error : 'Login failed';
       alert(errorMessage); 
@@ -36,6 +43,20 @@ const SignIn = () => {
   };
 
   return (
+    <>
+    <Navbar />
+    <div className="container mx-auto">
+    <ToastContainer
+      position="top-right"
+      autoClose={3000}           // Auto close after 3 seconds
+      hideProgressBar={false}     // Show or hide the progress bar
+      closeOnClick                // Close on click
+      pauseOnHover                // Pause on hover
+      draggable   
+      transition={Slide}  
+      className="mt-14"                // Allow drag-to-close
+    />
+
     <div name="SignIn" className="flex justify-center items-center min-h-screen bg-gray-100">
       <form onSubmit={handleSubmit} className="p-6 bg-white shadow-md rounded">
         <h2 className="text-2xl mb-4">Sign In</h2>
@@ -58,6 +79,8 @@ const SignIn = () => {
         <button type="submit" className="bg-blue-500 text-white p-2 rounded">Sign In</button>
       </form>
     </div>
+    </div>
+    </>
   );
 };
 

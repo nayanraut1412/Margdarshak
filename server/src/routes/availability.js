@@ -21,7 +21,26 @@ router.post('/add', verifyToken, async (req, res) => {
   }
 });
 
-// fetch Availability slots
+// Mentor side   fetch data of particular mentor
+router.get('/mentorslot', verifyToken, async (req, res) => {
+  try {
+    
+    const mentorId = req.user.id;
+
+    // Fetch only availability slots for this mentor
+    const mentorSlots = await Availability.find({ mentorId, isBooked: false})
+      .populate('menteeId', 'username')  
+      .lean();  
+
+    res.status(200).json(mentorSlots);  
+  } catch (error) {
+    console.error('Error fetching mentor’s availability slots:', error);
+    res.status(500).json({ error: 'Failed to fetch availability slots for this mentor' });
+  }
+});
+
+
+// fetch Availability slots (Mentee side)
 router.get('/mentor', verifyToken, async (req, res) => {
   try {
     const mentorSlots = await Availability.find({ isBooked: false }) 
@@ -40,7 +59,7 @@ router.get('/mentor', verifyToken, async (req, res) => {
 
 
 
-// Book a slot by mentee
+// Book a slot by mentee  (menteee side)
 router.post('/book', verifyToken, async (req, res) => {
   try {
     const { slotId } = req.body;
@@ -92,7 +111,7 @@ router.delete('/:id', verifyToken, async (req, res) => {
 
 
 
-// Fetch all booked slots for a mentor
+// Fetch all booked slots for a mentor (request page)
 router.get('/booked', verifyToken, async (req, res) => {
   try {
     const mentorId = req.user.id; 

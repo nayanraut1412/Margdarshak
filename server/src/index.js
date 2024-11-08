@@ -7,7 +7,6 @@ require('dotenv').config();
 const mentorRoutes = require('./routes/mentors');
 const authRoutes = require('./routes/auth');
 const menteeRoutes = require('./routes/mentee');
-// const bookingRoutes = require('./routes/booking');
 const availabilityRoutes = require('./routes/availability');
 
 

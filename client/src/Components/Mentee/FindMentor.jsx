@@ -2,7 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './MeNavbar';
-const backendUrl = process.env.REACT_APP_API_URL_PRODUCTION;
+
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const backendUrl = process.env.REACT_APP_API_URL;
 
 const MenteeBooking = () => {
   const [availableSlots, setAvailableSlots] = useState([]);
@@ -55,8 +59,10 @@ const MenteeBooking = () => {
 
       // Refresh the available slots
       fetchAvailableSlots();
+      toast.success('Slot Booked Successfully');
+
     } catch (error) {
-      setError('Failed to book slot');
+      toast.error('Failed to book slot');
       console.error('Error booking slot:', error);
     }
   };
@@ -64,6 +70,16 @@ const MenteeBooking = () => {
   return (
     <>
     <Navbar/>
+    <ToastContainer
+      position="top-right"
+      autoClose={3000}           // Auto close after 3 seconds
+      hideProgressBar={false}     // Show or hide the progress bar
+      closeOnClick                // Close on click
+      pauseOnHover                // Pause on hover
+      draggable   
+      transition={Slide}  
+      className="mt-14"               
+    />
     <div className="py-20">
       <h1 className="text-3xl font-semibold text-center mb-6">Available Slots for Mentoring</h1>
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}

@@ -6,7 +6,10 @@ import Navbar from './MrNavbar';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const backendUrl = process.env.REACT_APP_API_URL_PRODUCTION;
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const backendUrl = process.env.REACT_APP_API_URL;
 
 
 const Hero = () => {
@@ -29,7 +32,7 @@ const Hero = () => {
         if (response.status === 200) {
           setUserName(response.data.username); 
         } else {
-          setError('Failed to fetch user information');
+          toast.error('Failed to fetch user information');
         }
       } catch (error) {
         console.error('Error fetching user name:', error);
@@ -44,7 +47,17 @@ const Hero = () => {
   return (
     <>
     <Navbar/>
-      <div className='max-w-screen-2xl container mx-auto px-4 md:px-20 my-20'>
+    <ToastContainer
+      position="top-right"
+      autoClose={3000}           // Auto close after 3 seconds
+      hideProgressBar={false}     // Show or hide the progress bar
+      closeOnClick                // Close on click
+      pauseOnHover                // Pause on hover
+      draggable   
+      transition={Slide}  
+      className="mt-14"                
+    />
+      <div className='max-w-screen-2xl container mx-auto px-4 md:px-20 my-24'>
       <div className="flex justify-center text-xl md:text-2xl gap-14 font-bold text-blue-700 text-center">
         <span>Cloud Computing CA-2 </span> 
         <span>Prn: 2146491245038</span>
@@ -52,8 +65,8 @@ const Hero = () => {
       </div>
         <div className='flex flex-col md:flex-row'>
           <div className='md:w-1/2 ml-12 mt-12 md:mt-36 space-y-2 order-2 md:order-1'>
-            <span className='text-1xl'>Welcome Mentor {userName}!</span>
-            <div className='flex space-x-1 text-2xl md:text-3xl'>
+          <span className='text-2xl text-blue-700 font-bold'>Welcome, Mentor {userName}!</span>
+          <div className='flex space-x-1 text-2xl md:text-3xl'>
               <h1>Your gateway to expert</h1>
 
               {/* <span className='text-blue-700 font-bold'>Skill Development</span> */}

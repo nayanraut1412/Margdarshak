@@ -4,24 +4,27 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './MrNavbar';
 
-const backendUrl = process.env.REACT_APP_API_URL_PRODUCTION;
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const backendUrl = process.env.REACT_APP_API_URL;
 
 const MentorAvailability = () => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [availabilityList, setAvailabilityList] = useState([]);
-  const [error, setError] = useState(null);
+  const [error, ] = useState(null);
   const [editingSlot, setEditingSlot] = useState(null); 
 
   const fetchAvailability = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${backendUrl}/api/availability/mentor`, {
+      const response = await axios.get(`${backendUrl}/api/Availability/mentorslot`, {
         headers: { Authorization: token },
       });
       setAvailabilityList(response.data);
     } catch (error) {
-      setError('Failed to fetch availability');
+      toast.error('Failed to fetch availability');
     }
   };
 
@@ -29,6 +32,7 @@ const MentorAvailability = () => {
     fetchAvailability();
   }, []);
 
+  // adding new availability
   const handleAdd = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -38,13 +42,17 @@ const MentorAvailability = () => {
         { headers: { Authorization: token } }
       );
       setAvailabilityList([...availabilityList, response.data]);
+      toast.success('New Availability Added Successful!');
+      
       setDate('');
       setTime('');
     } catch (error) {
-      setError('Failed to add availability');
+      // setError('Failed to add availability');
+      toast.error('Failed to add availability');
     }
   };
 
+  // delete the availability list
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('token');
@@ -52,8 +60,10 @@ const MentorAvailability = () => {
         headers: { Authorization: token },
       });
       setAvailabilityList(availabilityList.filter((slot) => slot._id !== id));
+      toast.success('Availability Deleted Successful!');
+
     } catch (error) {
-      setError('Failed to delete slot');
+      toast.error('Failed to delete slot');
     }
   };
 
@@ -76,20 +86,36 @@ const MentorAvailability = () => {
       setAvailabilityList(availabilityList.map(slot =>
         slot._id === updatedSlot._id ? updatedSlot : slot
       ));
+      toast.success('Availability Edited Successful!');
+
       setEditingSlot(null); // Clear the editing state
       setDate('');
       setTime('');
     } catch (error) {
-      setError('Failed to update slot');
+      toast.error('Failed to update slot');
     }
   };
   return (
     <>
       <Navbar />
-      <div className="container mx-auto py-20 ">
+      
+      <div className="mt-20 container mx-auto">
+      {/* <div className="mt-8"> */}
+        <ToastContainer 
+          position="top-right"
+          autoClose={3000}           // Auto close after 3 seconds
+          hideProgressBar={false}     // Show or hide the progress bar
+          closeOnClick                // Close on click
+          pauseOnHover                // Pause on hover
+          draggable     
+          transition={Slide}  
+          className="mt-14" 
+                     
+        />
+      {/* </div> */}
         <h2 className="text-2xl font-semibold mb-4 text-center">Manage Your Availability</h2>
   
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 p-5 gap-8">
           {/* Column 1: Add Availability */}
           <div className="bg-white p-6 rounded shadow w-full max-w-md mx-auto">
   <h3 className="text-2xl font-semibold mb-6 text-center">Add or Edit Slot</h3>
@@ -137,12 +163,12 @@ const MentorAvailability = () => {
 
   
           {/* Column 2: Availability List */}
-          <div className="bg-white p-6 rounded shadow">
+          <div className="bg-white p-4 rounded shadow">
             <h3 className="text-2xl font-semibold mb-6 text-center">Your Availability</h3>
             {error && <p className="text-red-500">{error}</p>}
             <ul className="space-y-2">
               {availabilityList.map((slot) => (
-                <li key={slot._id} className="flex justify-between items-center bg-gray-100 p-4 rounded">
+                <li key={slot._id} className="flex justify-between items-center bg-gray-100 p-2 rounded">
                   {/* <span>{new Date(slot.date).toLocaleDateString()} - {slot.time}</span> */}
                   <div className="flex space-x-12">
                      <span className="text-sm text-gray-600">
@@ -174,6 +200,7 @@ const MentorAvailability = () => {
           </div>
         </div>
       </div>
+     
     </>
   ); 
 };
